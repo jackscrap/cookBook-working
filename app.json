@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "stack-navigator-example",
-    "description": "No description",
-    "slug": "snack-HkscKcYof",
-    "privacy": "unlisted",
+    "name": "almafamilycookbook",
+    "description": "The sacred texts.",
+    "slug": "almafamilycookbook",
+    "privacy": "public",
     "sdkVersion": "26.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,8 @@
       ]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+			"bundleIdentifier": "jackhasakeyboard.Alma-Family-Cookbook"
     }
   }
 }

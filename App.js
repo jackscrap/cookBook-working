@@ -13,8 +13,6 @@ import {
 
 import * as firebase from "firebase";
 
-import Head from "./src/comp/head";
-
 if (!firebase.apps.length) {
 	firebase.initializeApp(
 		{
@@ -28,11 +26,46 @@ if (!firebase.apps.length) {
 	);
 }
 
-function getRandomNumber() {
-  return Math.floor(Math.random() * 10);
+class Head extends React.Component {
+	constructor() {
+		super();
+	}
+
+	render() {
+		return (
+			<View>
+				<TouchableOpacity>
+					<Text
+						style={{
+							padding: 8,
+							fontSize: 100,
+							fontFamily: "Times New Roman",
+							textAlign: "center",
+							color: "#262626"
+						}}
+						onPress={
+							() => this.props.navigation.navigate(
+								"Index"
+							)
+						}
+					>
+						A
+					</Text>
+				</TouchableOpacity>
+
+				<View
+					style={{
+						borderBottomColor: "#262626",
+						borderBottomWidth: 6,
+						margin: 16
+					}}
+				/>
+			</View>
+		);
+	}
 }
 
-class LandingComp extends React.Component {
+class Landing extends React.Component {
 	constructor() {
 		super();
 
@@ -62,7 +95,7 @@ class LandingComp extends React.Component {
 
 	alphabet() {
 		var
-		c = [],
+			c = [],
 			i = "a".charCodeAt(0);
 
 		const j = "z".charCodeAt(0);
@@ -74,35 +107,35 @@ class LandingComp extends React.Component {
 		return c;
 	}
 
-  static navigationOptions = {
-    headerTitle: "A"
-  };
-
   render() {
     return (
-      <View
+      <SafeAreaView
         style={{
-          borderWidth: 16,
-          borderColor: "#222"
+          borderWidth: 26,
+          borderColor: "#262626"
         }}
 			>
-				<Head />
+			{
+				// <Head />
+			}
 
 				<ScrollView>
 					{
 						this.alphabet().map(
-							(c) => {
+							(c, k) => {
 								return (
 									<View
+										key={k}
 										style={{
-											padding: 8
-
+											padding: 8,
 										}}
 									>
 									<Text
 										style={{
+											margin: 8,
 											fontSize: 60,
-											margin: 8
+											// fontWeight: "bold",
+											color: "#262626"
 										}}
 									>
 										{c.toUpperCase()}
@@ -113,6 +146,7 @@ class LandingComp extends React.Component {
 												if (item.title[0].toLowerCase() == c) {
 													return (
 														<TouchableOpacity
+															key={k}
 															style={{
 																margin: 8
 															}}
@@ -127,7 +161,8 @@ class LandingComp extends React.Component {
 														>
 															<Text
 																style={{
-																	fontSize: 26
+																	fontSize: 26,
+																	color: "#262626"
 																}}
 															>
 																{item.title}
@@ -144,19 +179,12 @@ class LandingComp extends React.Component {
 						)
 					}
 				</ScrollView>
-
-        <Button
-          title="Recipe"
-          onPress={
-						() => this.props.navigation.navigate("Recipe")
-					}
-        />
-      </View>
+      </SafeAreaView>
     );
   }
 }
 
-class RecipeComp extends React.Component {
+class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -203,10 +231,6 @@ class RecipeComp extends React.Component {
 		);
 	}
 
-  static navigationOptions = {
-    headerTitle: "Recipe"
-  };
-
   render() {
 		const
 			{
@@ -220,24 +244,48 @@ class RecipeComp extends React.Component {
     return (
 			<SafeAreaView
 				style={{
-					borderWidth: 16,
-					borderColor: "#222"
+					borderWidth: 26,
+					borderColor: "#262626"
 				}}>
 			>
 
-			<Head />
+			{
+				// <Head />
+			}
 
-			<View id="head">
-				<Text
-					id="title"
+			<View
+				style={{
+					padding: 8
+				}}
+			>
+				<View
 					style={{
-						margin: 8,
-						padding: 8,
-						fontSize: 26
+						flexDirection: "column",
+						padding: 8
 					}}
 				>
-					{this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].title : "..."}
-				</Text>
+					<View
+						style={{
+							padding: 8
+						}}
+					>
+						<Text
+							style={{
+								fontSize: 26,
+							}}
+						>
+							{this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].title : "..."}
+						</Text>
+
+						<Text
+							style={{
+								fontSize: 16
+							}}
+						>
+							{this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].author : "..."}
+						</Text>
+					</View>
+				</View>
 			</View>
 
 			<View
@@ -258,15 +306,19 @@ class RecipeComp extends React.Component {
 						(item, k) => {
 							return (
 								<Text
+									key={k}
 									style={{
-										margin: 8
+										margin: 8,
+										padding: 8
 									}}
 								>
 									<Text
 										style={{
 											margin: 8,
 											padding: 8,
-											fontSize: 26
+											fontSize: 26,
+											flex: 1,
+											flexDirection: "row"
 										}}
 									>
 										{k + 1}
@@ -316,9 +368,11 @@ class RecipeComp extends React.Component {
 					>
 						{
 							this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].ingredient.map(
-								function(item) {
+								function(item, k) {
 									return (
-										<Text>
+										<Text
+											key={k}
+										>
 											{item}
 										</Text>
 									);
@@ -347,50 +401,50 @@ class RecipeComp extends React.Component {
 						return (
 							<View
 								id={(k + 1)}
+								key={k}
 								style={{
 									padding: 8
 								}}
 							>
-							<View
-								style={{
-									margin: 8,
-								}}
-							>
-							<View
-								style={{
-									flex: 1,
-									flexDirection: "row",
-								}}
-							>
-							<Text
-								style={{
-									fontSize: 40
-								}}
-							>
-								{(k + 1)}
-							</Text>
+								<View
+									style={{
+										margin: 8,
+									}}
+								>
+									<View
+										style={{
+											flex: 1,
+											flexDirection: "row",
+										}}
+									>
+										<Text
+											style={{
+												fontSize: 40,
+											}}
+										>
+											{(k + 1)}
+										</Text>
 
-							<View>
-							<Text
-								style={{
-									fontSize: 26
-								}}
-							>
-								{step.title}
-							</Text>
-							</View>
+									<View>
+										<Text
+											style={{
+												padding: 8,
+												fontSize: 26
+											}}
+										>
+											{step.title}
+									</Text>
+								</View>
 							</View>
 
-								<Text>
-									{step.desc}
-								</Text>
-							</View>
+									<Text>
+										{step.desc}
+									</Text>
+								</View>
 							</View>
 						);
 					}
-
 				) : <Text>...</Text>
-
 			}
 			</View>
 			</ScrollView>
@@ -402,8 +456,8 @@ class RecipeComp extends React.Component {
 
 const Nav = createStackNavigator(
   {
-    RouteNameOne: LandingComp,
-    Recipe: RecipeComp
+    Index: Landing,
+    Recipe: Recipe
   }, {
   }
 );
