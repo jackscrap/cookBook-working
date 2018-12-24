@@ -1,0 +1,107 @@
+<svg
+	width="260"
+	height="260"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+	<style>
+		text {
+			font-weight: bold;
+			fill: rgb(20%, 20%, 20%);
+			text-decoration: underline;
+		}
+	</style>
+
+	<!-- back -->
+	<rect
+		width="260"
+		height="260"
+		rx="26"
+		fill="rgb(26%, 26%, 26%)"
+	/>
+
+	<!-- page -->
+	<rect
+		width="248"
+		height="260"
+		rx="26"
+		fill="rgb(90%, 90%, 90%)"
+	/>
+	<rect
+		width="242"
+		height="260"
+		rx="26"
+		fill="rgb(96%, 96%, 96%)"
+	/>
+	<rect
+		width="246"
+		height="60"
+		rx="16"
+		x="10"
+		y="100"
+		fill="rgb(76, 217, 100)"
+	/>
+
+	<rect
+		width="232"
+		height="260"
+		rx="26"
+		fill="rgb(90%, 90%, 90%)"
+	/>
+	<rect
+		width="226"
+		height="260"
+		rx="26"
+		fill="rgb(96%, 96%, 96%)"
+	/>
+	<rect
+		width="226"
+		height="60"
+		rx="16"
+		x="10"
+		y="164"
+		fill="rgb(0, 122, 255)"
+	/>
+
+	<rect
+		width="216"
+		height="260"
+		rx="26"
+		fill="rgb(90%, 90%, 90%)"
+	/>
+	<rect
+		width="210"
+		height="260"
+		rx="26"
+		fill="rgb(96%, 96%, 96%)"
+	/>
+	<rect
+		width="210"
+		height="60"
+		rx="16"
+		x="10"
+		y="36"
+		fill="rgb(255, 59, 48)"
+	/>
+
+	<!-- cover -->
+	<rect
+		width="200"
+		height="260"
+		rx="26"
+		fill="rgb(26%, 26%, 26%)"
+	/>
+
+	<!-- emblem -->
+	<text
+		width="260"
+		height="260"
+		x="100"
+		y="130"
+		font-size="160"
+		alignment-baseline="middle"
+		text-anchor="middle"
+	>
+		A
+	</text>
+</svg>
