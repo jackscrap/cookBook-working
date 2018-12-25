@@ -28,37 +28,6 @@ if (!firebase.apps.length) {
 	);
 }
 
-class Test extends React.Component {
-	constructor(props) {
-		super(props);
-
-		const
-			{
-				navigation
-			} = this.prop;
-
-		this.state = {
-			recipe: []
-		};
-	}
-
-  render() {
-		return (
-			<View>
-			<TouchableOpacity></TouchableOpacity>
-
-			<View
-				style={{
-					borderBottomColor: "#262626",
-					borderBottomWidth: 6,
-					margin: 16
-				}}
-			/>
-		</View>
-	)
-}
-}
-
 class DogEar extends React.Component {
 	render() {
 		return (
@@ -85,6 +54,9 @@ class DogEar extends React.Component {
 				direction={
 					"up-left"
 				}
+				style={{
+					position: "absolute"
+				}}
 			/>
 			<Triangle
 				width={
@@ -100,13 +72,11 @@ class DogEar extends React.Component {
 					"down-right"
 				}
 				style={{
-					position: "absolute",
-
 					shadowOffset:{
 						width: 1,
 						height: 1
 					},
-					shadowColor: '#222',
+					shadowColor: "#222",
 					shadowOpacity: 0.16,
 
 					position: "absolute",
@@ -127,12 +97,10 @@ class Head extends React.Component {
 	render() {
 		return (
 			<SafeAreaView>
-				<DogEar />
-
 				<View>
 					<Text
 						style={{
-							padding: 8,
+							margin: 8,
 							fontFamily: "Times New Roman",
 							fontSize: 100,
 							textAlign: "center",
@@ -147,7 +115,9 @@ class Head extends React.Component {
 					style={{
 						borderBottomColor: "#262626",
 						borderBottomWidth: 6,
-						margin: 16
+						marginLeft: 16,
+						marginRight: 16,
+						marginBottom: 16
 					}}
 				/>
 			</SafeAreaView>
@@ -156,124 +126,138 @@ class Head extends React.Component {
 }
 
 class Landing extends React.Component {
-constructor() {
-	super();
+	constructor() {
+		super();
 
-	this.state = {
-		ln: [],
-		recipe: []
-	};
-}
-
-componentDidMount() {
-	const
-		root = firebase.database().ref(),
-
-		ref = root.child("recipe");
-
-	ref.on(
-		"value",
-		(snap) => {
-			this.setState(
-				{
-					recipe: snap.val()
-				}
-			);
-		}
-	);
-}
-
-alphabet() {
-	var
-		c = [],
-		i = "a".charCodeAt(0);
-
-	const j = "z".charCodeAt(0);
-
-	for (; i <= j; ++i) {
-		c.push(String.fromCharCode(i));
+		this.state = {
+			ln: [],
+			recipe: []
+		};
 	}
 
-	return c;
-}
+	componentDidMount() {
+		const
+			root = firebase.database().ref(),
 
-render() {
-	return (
-		<SafeAreaView
-			style={{
-				flex: 1,
-				borderWidth: 26,
-				borderColor: "#262626"
-			}}
-		>
-			<Head />
+			ref = root.child("recipe");
 
-				<ScrollView>
+		ref.on(
+			"value",
+			(snap) => {
+				this.setState(
 					{
-						this.alphabet().map(
-							(c, k) => {
-								return (
-									<View
-										key={k}
-										style={{
-											padding: 8,
-										}}
-									>
-									<Text
-										style={{
-											margin: 8,
-											fontSize: 60,
-											// fontWeight: "bold",
-											color: "#262626"
-										}}
-									>
-										{c.toUpperCase()}
-									</Text>
-									{
-										this.state.recipe.map(
-											(item, k) => {
-												if (item.title[0].toLowerCase() == c) {
-													return (
-														<TouchableOpacity
-															key={k}
-															style={{
-																margin: 8
-															}}
-															onPress={
-																() => this.props.navigation.navigate(
-																	"Recipe",
-																	{
-																		i: k
-																	}
-																)
-															}
-														>
-															<Text
-																style={{
-																	fontSize: 26,
-																	color: "#262626"
-																}}
-															>
-																{item.title}
-															</Text>
-														</TouchableOpacity>
-													);
-												}
-											}
-										)
-									}
-									</View>
-								);
-							}
-						)
+						recipe: snap.val()
 					}
-				</ScrollView>
-      </SafeAreaView>
-    );
-  }
+				);
+			}
+		);
+	}
+
+	alphabet() {
+		var
+			c = [],
+			i = "a".charCodeAt(0);
+
+		const j = "z".charCodeAt(0);
+
+		for (; i <= j; ++i) {
+			c.push(String.fromCharCode(i));
+		}
+
+		return c;
+	}
+
+	render() {
+		return (
+			<SafeAreaView
+				style={{
+					flex: 1,
+					borderWidth: 26,
+					borderColor: "#262626",
+
+					// shadowOffset:{
+					// 	width: 40,
+					// 	height: 40
+					// },
+					// shadowColor: "red",
+					// shadowOpacity: 0.16,
+				}}
+			>
+				<Head />
+
+					<ScrollView>
+						{
+							this.alphabet().map(
+								(c, k) => {
+									return (
+										<View
+											key={k}
+											style={{
+												padding: 8,
+											}}
+										>
+										<Text
+											style={{
+												margin: 8,
+												fontSize: 60,
+												// fontWeight: "bold",
+												color: "#262626"
+											}}
+										>
+											{c.toUpperCase()}
+										</Text>
+										{
+											this.state.recipe.map(
+												(item, k) => {
+													if (item.title[0].toLowerCase() == c) {
+														return (
+															<TouchableOpacity
+																key={k}
+																style={{
+																	margin: 8
+																}}
+																onPress={
+																	() => this.props.navigation.navigate(
+																		"Recipe",
+																		{
+																			i: k
+																		}
+																	)
+																}
+															>
+																<Text
+																	style={{
+																		fontSize: 26,
+																		color: "#262626"
+																	}}
+																>
+																	{item.title}
+																</Text>
+															</TouchableOpacity>
+														);
+													}
+												}
+											)
+										}
+										</View>
+									);
+								}
+							)
+						}
+					</ScrollView>
+				</SafeAreaView>
+			);
+		}
 }
 
 class Recipe extends React.Component {
+	static navigationOptions = () => {
+    return {
+			headerLeft: null,
+			headerRight: null
+    };
+  };
+
 	constructor(props) {
 		super(props);
 
@@ -338,8 +322,9 @@ class Recipe extends React.Component {
 					borderColor: "#262626"
 				}}>
 			>
+				<DogEar />
 
-			<Head />
+				<Head />
 
 			<View
 				style={{
@@ -382,10 +367,8 @@ class Recipe extends React.Component {
 				}}
 			>
 			<ScrollView
-				id="side"
 				style={{
-					minWidth: 100,
-					padding: 8,
+					padding: 16,
 					flexGrow: 1
 				}}
 			>
@@ -393,17 +376,14 @@ class Recipe extends React.Component {
 					this.state.recipe[itemId] ? this.state.recipe[itemId].step.map(
 						(item, k) => {
 							return (
-								<Text
+								<View
 									key={k}
 									style={{
-										margin: 8,
-										padding: 8
+										margin: 8
 									}}
 								>
 									<Text
 										style={{
-											margin: 8,
-											padding: 8,
 											fontSize: 26,
 											flex: 1,
 											flexDirection: "row"
@@ -414,12 +394,11 @@ class Recipe extends React.Component {
 
 									<Text
 										style={{
-											margin: 8
 										}}
 									>
 										{item.title}
 									</Text>
-								</Text>
+								</View>
 							);
 						}
 					) : <Text>...</Text>
@@ -483,57 +462,53 @@ class Recipe extends React.Component {
 			>
 				Steps
 			</Text>
-			{
-				this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].step.map(
-					(step, k) => {
-						return (
-							<View
-								id={(k + 1)}
-								key={k}
-								style={{
-									padding: 8
-								}}
-							>
+				{
+					this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].step.map(
+						(step, k) => {
+							return (
 								<View
-									style={{
-										margin: 8,
-									}}
+									id={(k + 1)}
+									key={k}
 								>
 									<View
 										style={{
-											flex: 1,
-											flexDirection: "row",
+											margin: 8
 										}}
 									>
-										<Text
+										<View
 											style={{
-												fontSize: 40,
+												flex: 1,
+												flexDirection: "column"
 											}}
 										>
-											{(k + 1)}
+											<Text
+												style={{
+													fontSize: 40,
+												}}
+											>
+												{(k + 1)}
+											</Text>
+
+											<View>
+												<Text
+													style={{
+														fontSize: 26
+													}}
+												>
+													{step.title}
+											</Text>
+										</View>
+									</View>
+
+										<Text>
+											{step.desc}
 										</Text>
-
-									<View>
-										<Text
-											style={{
-												padding: 8,
-												fontSize: 26
-											}}
-										>
-											{step.title}
-									</Text>
+									</View>
 								</View>
-							</View>
-
-									<Text>
-										{step.desc}
-									</Text>
-								</View>
-							</View>
-						);
-					}
-				) : <Text>...</Text>
-			}
+							);
+						}
+					) : <Text>...</Text>
+				}
 			</View>
 			</ScrollView>
 			</View>

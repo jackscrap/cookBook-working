@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
-  "expoServerPort": 19004,
-  "packagerPort": 19005,
-  "packagerPid": 6743,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 9674,
   "expoServerNgrokUrl": "https://4y-i9e.jackhasakeyboard.cookbook-working.exp.direct",
   "packagerNgrokUrl": "https://packager.4y-i9e.jackhasakeyboard.cookbook-working.exp.direct",
-  "ngrokPid": 6763
+  "ngrokPid": 9691
 }
