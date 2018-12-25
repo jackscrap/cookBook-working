@@ -13,6 +13,8 @@ import {
 
 import * as firebase from "firebase";
 
+import Triangle from "react-native-triangle";
+
 if (!firebase.apps.length) {
 	firebase.initializeApp(
 		{
@@ -26,32 +28,120 @@ if (!firebase.apps.length) {
 	);
 }
 
+class Test extends React.Component {
+	constructor(props) {
+		super(props);
+
+		const
+			{
+				navigation
+			} = this.prop;
+
+		this.state = {
+			recipe: []
+		};
+	}
+
+  render() {
+		return (
+			<View>
+			<TouchableOpacity></TouchableOpacity>
+
+			<View
+				style={{
+					borderBottomColor: "#262626",
+					borderBottomWidth: 6,
+					margin: 16
+				}}
+			/>
+		</View>
+	)
+}
+}
+
+class DogEar extends React.Component {
+	render() {
+		return (
+			<TouchableOpacity
+			onPress={
+				() => this.props.navigation.navigate(
+					"Recipe",
+					{
+						i: k
+					}
+				)
+			}
+			>
+			<Triangle
+				width={
+					60
+				}
+				height={
+					60
+				}
+				color={
+					"#EAE9EF"
+				}
+				direction={
+					"up-left"
+				}
+			/>
+			<Triangle
+				width={
+					60
+				}
+				height={
+					60
+				}
+				color={
+					"#EAE9EF"
+				}
+				direction={
+					"down-right"
+				}
+				style={{
+					position: "absolute",
+
+					shadowOffset:{
+						width: 1,
+						height: 1
+					},
+					shadowColor: '#222',
+					shadowOpacity: 0.16,
+
+					position: "absolute",
+					left: 0,
+					top: 0,
+			}}
+			/>
+			</TouchableOpacity>
+		);
+	}
+}
+
 class Head extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	render() {
 		return (
-			<View>
-				<TouchableOpacity>
+			<SafeAreaView>
+				<DogEar />
+
+				<View>
 					<Text
 						style={{
 							padding: 8,
-							fontSize: 100,
 							fontFamily: "Times New Roman",
+							fontSize: 100,
 							textAlign: "center",
 							color: "#262626"
 						}}
-						onPress={
-							() => this.props.navigation.navigate(
-								"Index"
-							)
-						}
 					>
 						A
 					</Text>
-				</TouchableOpacity>
+				</View>
 
 				<View
 					style={{
@@ -60,64 +150,63 @@ class Head extends React.Component {
 						margin: 16
 					}}
 				/>
-			</View>
+			</SafeAreaView>
 		);
 	}
 }
 
 class Landing extends React.Component {
-	constructor() {
-		super();
+constructor() {
+	super();
 
-		this.state = {
-			ln: [],
-			recipe: []
-		};
-	}
+	this.state = {
+		ln: [],
+		recipe: []
+	};
+}
 
-	componentDidMount() {
-		const
-			root = firebase.database().ref(),
+componentDidMount() {
+	const
+		root = firebase.database().ref(),
 
-			ref = root.child("recipe");
+		ref = root.child("recipe");
 
-		ref.on(
-			"value",
-			(snap) => {
-				this.setState(
-					{
-						recipe: snap.val()
-					}
-				);
-			}
-		);
-	}
-
-	alphabet() {
-		var
-			c = [],
-			i = "a".charCodeAt(0);
-
-		const j = "z".charCodeAt(0);
-
-		for (; i <= j; ++i) {
-			c.push(String.fromCharCode(i));
+	ref.on(
+		"value",
+		(snap) => {
+			this.setState(
+				{
+					recipe: snap.val()
+				}
+			);
 		}
+	);
+}
 
-		return c;
+alphabet() {
+	var
+		c = [],
+		i = "a".charCodeAt(0);
+
+	const j = "z".charCodeAt(0);
+
+	for (; i <= j; ++i) {
+		c.push(String.fromCharCode(i));
 	}
 
-  render() {
-    return (
-      <SafeAreaView
-        style={{
-          borderWidth: 26,
-          borderColor: "#262626"
-        }}
-			>
-			{
-				// <Head />
-			}
+	return c;
+}
+
+render() {
+	return (
+		<SafeAreaView
+			style={{
+				flex: 1,
+				borderWidth: 26,
+				borderColor: "#262626"
+			}}
+		>
+			<Head />
 
 				<ScrollView>
 					{
@@ -244,14 +333,13 @@ class Recipe extends React.Component {
     return (
 			<SafeAreaView
 				style={{
+					flex: 1,
 					borderWidth: 26,
 					borderColor: "#262626"
 				}}>
 			>
 
-			{
-				// <Head />
-			}
+			<Head />
 
 			<View
 				style={{
@@ -456,7 +544,7 @@ class Recipe extends React.Component {
 
 const Nav = createStackNavigator(
   {
-    Index: Landing,
+    Landing: Landing,
     Recipe: Recipe
   }, {
   }
