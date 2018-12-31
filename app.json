@@ -1,29 +1,31 @@
 {
   "expo": {
-    "name": "almafamilycookbook",
-    "description": "The sacred texts.",
+    "name": "Alma Family Cookbook",
     "slug": "almafamilycookbook",
     "privacy": "public",
-    "sdkVersion": "26.0.0",
+    "sdkVersion": "31.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
-    "loading": {
-      "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
-      "hideExponentText": false
+    "icon": "./icon.png",
+    "splash": {
+      "image": "./icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "packagerOpts": {
-      "assetExts": [
-        "ttf",
-        "mp4",
-        "otf",
-        "xml"
-      ]
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
-    "ios": {
-      "supportsTablet": true,
-			"bundleIdentifier": "jackhasakeyboard.Alma-Family-Cookbook"
-    }
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "cookbooklol"
+		}
   }
 }
+

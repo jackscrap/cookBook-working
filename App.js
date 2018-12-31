@@ -32,14 +32,14 @@ class DogEar extends React.Component {
 	render() {
 		return (
 			<TouchableOpacity
-			onPress={
-				() => this.props.navigation.navigate(
-					"Recipe",
-					{
-						i: k
-					}
-				)
-			}
+				onPress={
+					() => this.props.navigation.navigate(
+						"Recipe",
+						{
+							i: k
+						}
+					)
+				}
 			>
 			<Triangle
 				width={
@@ -82,7 +82,7 @@ class DogEar extends React.Component {
 					position: "absolute",
 					left: 0,
 					top: 0,
-			}}
+				}}
 			/>
 			</TouchableOpacity>
 		);
@@ -185,90 +185,74 @@ class Landing extends React.Component {
 			>
 				<Head />
 
-					<ScrollView>
-						{
-							this.alphabet().map(
-								(c, k) => {
-									return (
-										<View
-											key={k}
-											style={{
-												padding: 8,
-											}}
-										>
-										<Text
-											style={{
-												margin: 8,
-												fontSize: 60,
-												// fontWeight: "bold",
-												color: "#262626"
-											}}
-										>
-											{c.toUpperCase()}
-										</Text>
-										{
-											this.state.recipe.map(
-												(item, k) => {
-													if (item.title[0].toLowerCase() == c) {
-														return (
-															<TouchableOpacity
-																key={k}
+				<ScrollView>
+					{
+						this.alphabet().map(
+							(c, k) => {
+								return (
+									<View
+										key={k}
+										style={{
+											padding: 8,
+										}}
+									>
+									<Text
+										style={{
+											margin: 8,
+											fontSize: 60,
+											// fontWeight: "bold",
+											color: "#262626"
+										}}
+									>
+										{c.toUpperCase()}
+									</Text>
+									{
+										this.state.recipe.map(
+											(item, k) => {
+												if (item.title[0].toLowerCase() == c) {
+													return (
+														<TouchableOpacity
+															key={k}
+															style={{
+																margin: 8
+															}}
+															onPress={
+																() => this.props.navigation.navigate(
+																	"Recipe",
+																	{
+																		i: k
+																	}
+																)
+															}
+														>
+															<Text
 																style={{
-																	margin: 8
+																	fontSize: 26,
+																	color: "#262626"
 																}}
-																onPress={
-																	() => this.props.navigation.navigate(
-																		"Recipe",
-																		{
-																			i: k
-																		}
-																	)
-																}
 															>
-																<Text
-																	style={{
-																		fontSize: 26,
-																		color: "#262626"
-																	}}
-																>
-																	{item.title}
-																</Text>
-															</TouchableOpacity>
-														);
-													}
+																{item.title}
+															</Text>
+														</TouchableOpacity>
+													);
 												}
-											)
-										}
-										</View>
-									);
-								}
-							)
-						}
-					</ScrollView>
+											}
+										)
+									}
+									</View>
+								);
+							}
+						)
+					}
+				</ScrollView>
 				</SafeAreaView>
 			);
 		}
 }
 
 class Recipe extends React.Component {
-	static navigationOptions = () => {
-    return {
-			headerLeft: null,
-			headerRight: null
-    };
-  };
-
 	constructor(props) {
 		super(props);
-
-		const
-			{
-				navigation
-			} = this.props,
-    	itemId = navigation.getParam(
-				"i",
-				"NO-ID"
-			);
 
 		this.state = {
 			recipe: []
@@ -288,130 +272,57 @@ class Recipe extends React.Component {
 					recipe: snap.val()
 				});
 
-				const
-					{
-						navigation
-					} = this.props,
-					itemId = navigation.getParam(
-						"i",
-						"NO-ID"
-					);
+				const {
+					navigation
+				} = this.props;
 
 				this.setState({
-					curr: this.state.recipe[itemId]
+					curr: this.state.recipe[3]
 				});
 			}
 		);
 	}
 
   render() {
-		const
-			{
-				navigation
-			} = this.props,
-    	itemId = navigation.getParam(
-				"i",
-				"NO-ID"
-			);
-
     return (
 			<SafeAreaView
 				style={{
-					flex: 1,
+					flexGrow: 1	,
 					borderWidth: 26,
 					borderColor: "#262626"
-				}}>
+				}}
 			>
-				<DogEar />
 
-				<Head />
+			<DogEar />
+
+			<View
+				style={{
+				}}
+			>
+				<Text
+					style={{
+						fontSize: 100,
+						textAlign: "center",
+						fontFamily: "Times New Roman"
+					}}
+				>
+					A
+				</Text>
+			</View>
+
+			<View
+				style={{
+					borderBottomColor: "#262626",
+					borderBottomWidth: 6,
+					margin: 16
+				}}
+			/>
 
 			<View
 				style={{
 					padding: 8
 				}}
 			>
-				<View
-					style={{
-						flexDirection: "column",
-						padding: 8
-					}}
-				>
-					<View
-						style={{
-							padding: 8
-						}}
-					>
-						<Text
-							style={{
-								fontSize: 26,
-							}}
-						>
-							{this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].title : "..."}
-						</Text>
-
-						<Text
-							style={{
-								fontSize: 16
-							}}
-						>
-							{this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].author : "..."}
-						</Text>
-					</View>
-				</View>
-			</View>
-
-			<View
-				style={{
-					flexDirection: "row"
-				}}
-			>
-			<ScrollView
-				style={{
-					padding: 16,
-					flexGrow: 1
-				}}
-			>
-				{
-					this.state.recipe[itemId] ? this.state.recipe[itemId].step.map(
-						(item, k) => {
-							return (
-								<View
-									key={k}
-									style={{
-										margin: 8
-									}}
-								>
-									<Text
-										style={{
-											fontSize: 26,
-											flex: 1,
-											flexDirection: "row"
-										}}
-									>
-										{k + 1}
-									</Text>
-
-									<Text
-										style={{
-										}}
-									>
-										{item.title}
-									</Text>
-								</View>
-							);
-						}
-					) : <Text>...</Text>
-				}
-			</ScrollView>
-
-			<ScrollView
-				style={{
-					padding: 8,
-					flexGrow: 1
-				}}
-			>
-			{
 				<View
 					style={{
 						padding: 8
@@ -419,100 +330,117 @@ class Recipe extends React.Component {
 				>
 					<Text
 						style={{
-							padding: 8,
 							fontSize: 26
 						}}
 					>
-						Ingredients
+						{
+							this.state.recipe[3] != undefined ? this.state.recipe[3].title : "..."
+						}
 					</Text>
 
-					<View
+					<Text
 						style={{
-							padding: 8,
-							flex: 1,
-							flexDirection: "column"
+							fontSize: 16
 						}}
 					>
 						{
-							this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].ingredient.map(
-								function(item, k) {
-									return (
-										<Text
-											key={k}
-										>
-											{item}
-										</Text>
-									);
-								}
-							) : <Text>...</Text>
+							this.state.recipe[3] != undefined ? this.state.recipe[3].author : "..."
 						}
-					</View>
+					</Text>
 				</View>
-			}
+			</View>
+
 			<View
 				style={{
-					padding: 8
+					flex: 1,
+					flexDirection: "row"
 				}}
 			>
-			<Text
-				style={{
-					padding: 8,
-					fontSize: 26
-				}}
-			>
-				Steps
-			</Text>
-				{
-					this.state.recipe[itemId] != undefined ? this.state.recipe[itemId].step.map(
-						(step, k) => {
-							return (
-								<View
-									id={(k + 1)}
-									key={k}
-								>
+				<ScrollView
+					style={{
+						padding: 8,
+						height: "100%"
+					}}
+				>
+					{
+						this.state.recipe[3] != undefined ? this.state.recipe[3].step.map(
+							(step, k) => {
+								return (
 									<View
+										key={k}
 										style={{
 											margin: 8
 										}}
 									>
-										<View
+										<Text
 											style={{
-												flex: 1,
-												flexDirection: "column"
+												fontSize: 26
 											}}
 										>
-											<Text
-												style={{
-													fontSize: 40,
-												}}
-											>
-												{(k + 1)}
-											</Text>
+											{k + 1}
+										</Text>
 
-											<View>
-												<Text
-													style={{
-														fontSize: 26
-													}}
-												>
-													{step.title}
-											</Text>
-										</View>
+										<Text
+											style={{
+												fontSize: 16
+											}}
+										>
+											{step.title}
+										</Text>
 									</View>
+								);
+							}
+						) : <Text>...</Text>
+					}
+				</ScrollView>
 
-										<Text>
+				<ScrollView
+					style={{
+						padding: 8
+					}}
+				>
+					{
+						this.state.recipe[3] != undefined ? this.state.recipe[3].step.map(
+							(step, k) => {
+								return (
+									<View
+										key={k}
+										style={{
+											margin: 8
+										}}
+									>
+										<Text
+											style={{
+												fontSize: 40
+											}}
+										>
+											{k + 1}
+										</Text>
+
+										<Text
+											style={{
+												fontSize: 26
+											}}
+										>
+											{step.title}
+										</Text>
+
+										<Text
+											style={{
+												fontSize: 16
+											}}
+										>
 											{step.desc}
 										</Text>
 									</View>
-								</View>
-							);
-						}
-					) : <Text>...</Text>
-				}
+								);
+							}
+						) : <Text>...</Text>
+					}
+				</ScrollView>
 			</View>
-			</ScrollView>
-			</View>
-			</SafeAreaView>
+
+      </SafeAreaView>
     );
   }
 }
